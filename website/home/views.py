@@ -14,6 +14,9 @@ def index(request):
         return redirect("/login")
     return render(request, 'index.html')
 
+def Item(request):
+    return render(request, 'Items.html')
+
 def loginUser(request):
     if request.method=="POST":
         Username = request.POST.get('username')
