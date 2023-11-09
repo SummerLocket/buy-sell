@@ -4,6 +4,7 @@ from django.template import loader
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from .forms import UploadItemForm
+from .models import Item
 
 
 # admin account - user- admin, email- admin@email.com, pass- admin
@@ -45,7 +46,7 @@ def upload_item(request):
         if form.is_valid():
             # Process the uploaded item here, for example, save it to the database.
             # Access form data using form.cleaned_data['field_name']
-
+            new_item = form.save()
             # After processing, you can redirect the user to a success page or
             # the same page with a success message.
 
