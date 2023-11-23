@@ -6,6 +6,12 @@
 <head>
     <title>Items Page</title>
     <style>
+        body {
+  background-image: url('sellers.png');
+  background-size: cover; /* Adjusts the size of the background image */
+  /* You can also use background-repeat, background-position, etc., to further customize */
+}
+
         /* Style for the navigation bar */
         ul {
             list-style-type: none;
@@ -36,9 +42,9 @@
 
 <!-- Navigation bar -->
 <ul>
-    <li><a href="items.php">Items</a></li>
-    <li><a href="inventory.php">Inventory</a></li>
-    <li><a href="transaction.php">Transaction</a></li>
+    <li><a href="#">Items</a></li>
+    <li><a href="#">Inventory</a></li>
+    <li><a href="#">Transaction</a></li>
 </ul>
 
 <!-- Display items related to the username (you can include your PHP logic here) -->
