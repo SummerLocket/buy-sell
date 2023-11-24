@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
@@ -9,6 +10,7 @@ from .models import Item
 
 # admin account - user- admin, email- admin@email.com, pass- admin
 # user account - user- ayush, pass- qwe123!@#
+# superuser - ayushs, pass- ayushs
 # Create your views here.
 
 
@@ -36,6 +38,8 @@ def logoutUser(request):
     logout(request)
     return redirect('/login')
 
+def upload_success(request):
+    return render(request, 'upload_success.html')
 
 # @login_required
 def upload_item(request):
@@ -44,9 +48,10 @@ def upload_item(request):
     elif request.method == 'POST':
         form = UploadItemForm(request.POST, request.FILES)
         if form.is_valid():
-            # Process the uploaded item here, for example, save it to the database.
-            # Access form data using form.cleaned_data['field_name']
-            new_item = form.save()
+            # Set the seller to the currently logged-in user
+            form.instance.seller = request.user
+            # Save the item to the database
+            form.save()
             # After processing, you can redirect the user to a success page or
             # the same page with a success message.
 
@@ -56,3 +61,8 @@ def upload_item(request):
         form = UploadItemForm()
 
     return render(request, 'upload_item.html', {'form': form})
+
+def seller_items(request):
+    # Retrieve all items uploaded by the currently logged-in seller
+    items = Item.objects.filter(seller=request.user)
+    return render(request, 'seller_items.html', {'items': items})
