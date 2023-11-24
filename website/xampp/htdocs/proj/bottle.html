@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-commerce Product Details</title>
+  <link rel="stylesheet" href="bottle.css">
+</head>
+<body>
+  <?php
+    // Connect to your database (replace with your database credentials)
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "users";
+
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $database);
+
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // Fetch the price of the item named 'bottle' from the 'items' table
+    $item_name = 'bottle'; // Change this to the item you're querying
+    $sql = "SELECT price FROM items WHERE name = '$item_name'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        price = $row['price'];
+    } else {
+        <!-- echo "Item not found!"; -->
+    }
+
+    // Close the connection
+    mysqli_close($conn);
+    ?>
+  <header>
+    <h1>Product Details</h1>
+    <a href="index.html">Back to Products</a>
+  </header>
+  
+  <main class="product-details">
+    <div class="product">
+      <img src="bottle.webp" alt="Product 1">
+      <div class="product-info">
+        <h2>Product Name</h2>
+        <p>Description of the product.</p>
+        <p>$row['price']</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="details">
+      <h2>Product Details</h2>
+      <p>More detailed information about the product...</p>
+      <ul>
+        <li>Feature 1</li>
+        <li>Feature 2</li>
+        <li>Feature 3</li>
+        <!-- Add more detailed information here -->
+      </ul>
+    </div>
+  </main>
+</body>
+</html>
