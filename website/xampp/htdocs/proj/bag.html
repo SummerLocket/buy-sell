@@ -6,23 +6,21 @@
   <link rel="stylesheet" href="bottle.css">
 </head>
 <body>
-  <script>
-    fetch('pwatch.php')
-        .then(response => response.text())
-        .then(data => {
-            // Use the fetched data in the HTML body
-            document.getElementById('dataDisplay').innerHTML = data;
+    <script>
+        fetch('pbag.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('dataDisplay').innerHTML = data;
 
-            // Example: Using the fetched data in another part of the HTML body
-            const priceParagraph = document.createElement('p');
-            priceParagraph.textContent = `The price is: ${data}`;
-            document.body.appendChild(priceParagraph);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            document.getElementById('dataDisplay').innerText = 'Failed to fetch data.';
-        });
-</script>
+                const priceParagraph = document.createElement('p');
+                priceParagraph.textContent = `The price is: ${data}`;
+                document.body.appendChild(priceParagraph);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('dataDisplay').innerText = 'Failed to fetch data.';
+            });
+    </script>
   <header>
     <h1>Product Details</h1>
     <a href="products.html">Back to Products</a>
@@ -30,7 +28,7 @@
   
   <main class="product-details">
     <div class="product">
-      <img src="watch.jpg" alt="Product 1">
+      <img src="bag.jpg" alt="Product 1">
       <div class="product-info">
         <h2>Product Name</h2>
         <p>Description of the product.</p>
@@ -46,7 +44,6 @@
         <li>Feature 1</li>
         <li>Feature 2</li>
         <li>Feature 3</li>
-        <!-- Add more detailed information here -->
       </ul>
     </div>
   </main>

@@ -6,18 +6,33 @@
   <link rel="stylesheet" href="bottle.css">
 </head>
 <body>
+    <script>
+        fetch('plamp.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('dataDisplay').innerHTML = data;
+
+                const priceParagraph = document.createElement('p');
+                priceParagraph.textContent = `The price is: ${data}`;
+                document.body.appendChild(priceParagraph);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('dataDisplay').innerText = 'Failed to fetch data.';
+            });
+    </script>
   <header>
     <h1>Product Details</h1>
-    <a href="index.html">Back to Products</a>
+    <a href="products.html">Back to Products</a>
   </header>
   
   <main class="product-details">
     <div class="product">
-      <img src="bottle.webp" alt="Product 1">
+      <img src="lamp.jpg" alt="Product 1">
       <div class="product-info">
-        <h2>Product Name</h2>
+        <h2>Lamp</h2>
         <p>Description of the product.</p>
-        <p>$XX.XX</p>
+        <p><div id="dataDisplay"></div></p>
         <button>Add to Cart</button>
       </div>
     </div>
@@ -29,7 +44,6 @@
         <li>Feature 1</li>
         <li>Feature 2</li>
         <li>Feature 3</li>
-        <!-- Add more detailed information here -->
       </ul>
     </div>
   </main>
