@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        html{
+
+        }
+        .div0{
+        margin-left : 30vw;
+      text-align : center;
+      border : 2px solid black;
+      display: inline-block;
+      background-color : orange;
+        }
+
+        .div2{
+        background-color : yellow;
+        margin : 10px;
+<!--        margin-left : 35vw;-->
+
+        border : 2px solid black;
+        border-radius : 100px;
+        height : 400px;
+        width : 400px;
+        text-align : center;
+        }
+    </style>
+    <script>
+
+        function validate(){
+             var username = document.getElementById('username').value;
+             var password = document.getElementById('psw').value;
+             let regex = /^[a-zA-Z]([0-9a-zA-Z]){2,10}$/;
+             if(!regex.test(username)){
+                 alert('Username is invalid');
+
+                                     }
+               regex = /[a-zA-Z0-9]/;
+                if(!regex.test(password)){
+                 alert('Password is invalid');
+                }
+
+        }
+    </script>
+</head>
+
+<body>
+<div class="div0">
+<h1>Login Form</h1>
+<br> <br><br>
+ <div class="div2">
+    <form action="/newstopics" method="post">
+    {% csrf_token %}
+        <br> <br><br> <br>
+          <label for="username"><b>Username :</b></label>
+         <input type="text" placeholder="Enter Username" name="username" id="username" >
+          <br> <br><br> <br>
+         <label for="psw"><b>Password :</b></label>
+         <input type="password" placeholder="Enter Password" name="psw" id="psw" >
+          <br><br><br> <br>
+        <a href="Game"><button onclick="validate()">Login</button></a>
+        <br> <br><br> <br>
+        Not registered yet? >>>
+        <a href="reg"><button>Register</button></a>
+    </form>
+  </div>
+    <br>
+</div>
+</body>
+</html>

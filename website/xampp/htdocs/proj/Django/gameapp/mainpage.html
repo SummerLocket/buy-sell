@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        html{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+
+   <h1 style="margin-left: 40vw;">Library Management System</h1>
+   <br><br><br><br>
+    <p style="margin-left: 40vw;">Search a Book : </p>
+       <input style="margin-left: 42vw;" id="bookname" type="text">
+
+    <Button   onclick="SearchBook()">Search</Button>
+
+
+     <br style="margin-left: 40vw;"><br><br><br><br><br>
+       <p style="margin-left: 40vw;">Return a Book : </p>
+            <input style="margin-left: 42vw;" id="book" type="text">
+
+    <Button onclick="Check()">Submit</Button>
+
+       <script>
+           function SearchBook()
+           {
+               var name = document.getElementById("bookname").value;
+
+           }
+           function Check()
+           {
+               var name = document.getElementById("book").value;
+
+           }
+       </script>
+
+</body>
+</html>

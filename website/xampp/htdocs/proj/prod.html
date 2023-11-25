@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+    <form action="prod.php" method="post" enctype="multipart/form-data">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required><br>
+
+        <label for="count">Count:</label>
+        <input type="text" id="count" name="count" required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="desc" name="desc" required></textarea><br>
+
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required><br>
+
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
