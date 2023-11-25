@@ -3,26 +3,100 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Seller's Website</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .nav-btn {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 20px 30%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 15%;
+            cursor: pointer;
+        }
+
+        .left-nav-container {
+            float: left;
+            width: 20%;
+            padding: 50px;
+        }
+
+        .right-content {
+            float: right;
+            width: 70%;
+            padding: 20px;
+        }
+
+        .details {
+            padding: 40px;
+        }
+        p {
+            background-color: #d3f3cb; 
+            
+            padding: 20px; 
+            border-radius: 10px;           
+            font-size: 16px; 
+            
+        }
+    
+        ul {
+            list-style-type: disc;
+            margin-left: -3%; 
+            
+        }
+    
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
     <body>
-        Hello this is index page.
-        welcome {{request.user}}
-        <p>
-            this is a checking of wesite
-        </p>
-        <p> 
-            Click on the here link to view your <a href="/items">items</a> 
-        </p>
-        <p> 
-            To add your items click --><a href="/upload_item">upload </a> :-)
-        </p>
+        <div class="header">
+            <h1>Welcome to Seller's Website</h1>
+            <h2>{{request.user}}</h2>
+        </div>
         
-        <a href="/logout">Logout</a>
-        
+        <div class="left-nav-container">
+            <button class="nav-btn" onclick="location.href='/upload_item'">Upload Item</button>
+            <button class="nav-btn" onclick="location.href='/seller_items'">Seller's Items</button>
+            <button class="nav-btn" onclick="location.href='/buyer'">Buyer's Page</button>
+            <button class="nav-btn" style="margin-top: 30%;" onclick="location.href='/logout'">Logout</button>
+        </div>
+
+        <div class="right-content">
+            <div class="details">
+                <h2>Details of website</h2>
+                <p>This e-commerce platform provides users with a seamless experience for buying and selling an array of products.
+                    The seller's interface, a key aspect of our Software Lab project, empowers users to effortlessly list items for sale. Sellers can provide detailed descriptions, images, and pricing, allowing for an engaging product listing. To enhance buyer accessibility, our implementation ensures users can browse products from various sellers without the need for a login, promoting a user-friendly environment.
+                    In addition to the buyer-focused features, our backend system is robust and efficient. It tracks and updates sellers' inventories as items are sold, offering sellers a clear overview of their listed items and the count of products sold. This functionality streamlines inventory management for sellers, contributing to a more effective storefront.                    
+                    The Buy&Sell website successfully combines an intuitive user interface with a powerful backend system, creating a dynamic e-commerce platform that caters to the diverse needs of both sellers and buyers.
+                
+                    <ul>We have used</ul>
+                                    <li>frontend including - HTML, CSS, JavaScript</li>
+                                    <li>backend technologies - Php, django, python,</li>
+                                    <li>database - SQL,</li>
+                                    <li>version control – Git, to develop the website.</li>
+                </p>
+            </div>
+        </div>
+      
         <script src="" async defer></script>
     </body>
 </html>
