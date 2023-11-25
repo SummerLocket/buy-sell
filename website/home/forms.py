@@ -1,17 +1,16 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Item
+# from .models import Product
+from django.contrib.auth.forms import UserCreationForm
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User  # Assuming you have imported User from django.contrib.auth.models
+        fields = ['username', 'password1', 'password2']
 
 class UploadItemForm(forms.ModelForm):
-    # item_name = forms.CharField(max_length=100)
-    # item_description = forms.CharField(widget=forms.Textarea)
-    # item_image = forms.ImageField()
-    # Add any other fields you need for your item upload form
     class Meta:
         model = Item
-        fields = ['seller', 'item_name', 'item_description', 'item_image']
+        fields = ['item_name', 'item_category', 'item_price', 'item_image', 'item_description']
 
-    def __init__(self, *args, **kwargs):
-        super(UploadItemForm, self).__init__(*args, **kwargs)
-        self.fields['seller'].widget = forms.HiddenInput()
-        self.fields['seller'].required = False  # Make the seller field not required

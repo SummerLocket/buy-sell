@@ -14,8 +14,11 @@
     {% if items %}
         <ul>
             {% for item in items %}
-                <li>{{ item.item_name }} - {{ item.item_description }}</li>
-                <!-- Add more details as needed -->
+            <li>
+                {{ item.item_name }} - {{ item.item_description }} - {{ item.item_price }}
+                <img src="{{ item.item_image.url }}" width="500" height="600">
+            </li>           
+
             {% endfor %}
         </ul>
     {% else %}
