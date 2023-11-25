@@ -13,7 +13,8 @@
     <ul>
         {% for product in products %}
             <li>
-                {{ product.item_name }} - {{ product.item_price }}
+                {{ product.item_name }} - {{ product.item_description }} - {{ product.item_price }}
+                <img src="{{ product.item_image.url }}" width="500" height="600">
                 <a href="{% url 'purchase_product' product.id %}">Purchase</a>
             </li>
         {% endfor %}

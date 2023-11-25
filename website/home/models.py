@@ -8,7 +8,8 @@ class Item(models.Model):
     item_description = models.TextField(default=None)
     item_category = models.CharField(max_length=255, default=None)
     item_price = models.DecimalField(max_digits=10, decimal_places=2, default=None)
-    item_image = models.ImageField(upload_to='item_images/', default=None)  
+    item_image = models.ImageField(upload_to='item_images/', default=None) 
+    items_sold = models.PositiveIntegerField(default=0) 
     
 
     def __str__(self):

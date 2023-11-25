@@ -15,6 +15,5 @@ urlpatterns = [
     path('product/upload', product_upload, name='product_upload'),
     path('buyer/', buyer_page, name='buyer_page'),
     path('buyer/purchase/<int:product_id>/', purchase_product, name='purchase_product'),
-
-
+    
 ]

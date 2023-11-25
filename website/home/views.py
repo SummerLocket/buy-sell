@@ -116,19 +116,21 @@ def get_current_seller(request):
 
 def buyer_page(request):
     # Retrieve all products available for purchase
-    products = Product.objects.all()
+    products = Item.objects.all()
 
     return render(request, 'buyer_page.html', {'products': products})
 
 def purchase_product(request, product_id):
     # Implement logic to process the purchase of a product
-    product = Product.objects.get(pk=product_id)
+    product = Item.objects.get(pk=product_id)
 
     # Update the seller's page to reflect changes in sold items
     seller = product.seller
-    seller_products = Product.objects.filter(seller=seller)
+    seller_products = Item.objects.filter(seller=seller)
     sold_product = seller_products.get(pk=product_id)
-    sold_product.sold = True
+    # sold_product.sold = True
+    sold_product.items_sold += 1
     sold_product.save()
 
-    return redirect('buyer_page')
+    return HttpResponse("ok purchased")
+
