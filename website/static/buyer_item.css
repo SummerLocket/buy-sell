@@ -33,7 +33,7 @@ body {
     width: 100%;
     height: auto;
     max-height: 200px;
-    /* Set a max height for the images */
+
     object-fit: cover;
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
