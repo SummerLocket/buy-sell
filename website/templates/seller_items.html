@@ -1,30 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Items</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static "seller_items.css" %}">
 </head>
 <body>
-    <h1 class="title">Your Uploaded Items</h1>
+    <div class="button-container">
+        <div class="left-nav-container">
+            <button class="nav-btn" onclick="location.href='/index'">main</button>
+            <button class="nav-btn" onclick="location.href='/upload_item'">Upload Item</button>
+            <button class="nav-btn" onclick="location.href='/seller_items'">Seller's Items</button>
+            <button class="nav-btn" onclick="location.href='/order'">Seller's Orders</button>
+            <button class="nav-btn" onclick="location.href='/'">Buyer's Page</button>
+            <button class="nav-btn" style="margin-top:0;" onclick="location.href='/logout'">Logout</button>
+        </div>
+    </div>
 
-    {% if items %}
-        <ul>
+    <h1 class="title">{{request.user}} Uploaded Items</h1>
+
+    <table class="item-table">
+        {% if items %}
             {% for item in items %}
-            <li>
-                {{ item.item_name }} - {{ item.item_description }} - {{ item.item_price }}
-                <img src="{{ item.item_image.url }}" width="500" height="600">
-            </li>           
-
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                    <tr class="item-row">
+                {% endif %}
+                <td class="item">
+                    <img src="{{ item.item_image.url }}" alt="{{ item.item_name }}" style="width: 30vw;">
+                    <h2>{{ item.item_name }}</h2>
+                    <p>{{ item.item_description }}</p>
+                    <p><span>Price:</span> Rs.{{ item.item_price }}</p>
+                    <h2>Order: {{ item.items_sold }}</h2>
+                </td>
+                {% if forloop.last or forloop.counter|divisibleby:3 %}
+                    </tr>
+                {% endif %}
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No items uploaded yet.</p>
-    {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="3">No items uploaded yet.</td>
+            </tr>
+        {% endif %}
+    </table>
 
-    <a href="{% url 'upload_item' %}">Upload Another Item</a>
+    <a href="{% url 'upload_item' %}" class="upload-link">Upload Another Item</a>
 </body>
 </html>

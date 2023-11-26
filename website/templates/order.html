@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Orders</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        li {
+            width: calc(33.33% - 20px);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        
+        li img {
+            width: 100%;
+            height: auto;
+            max-height: 200px; /* Set a max height for the images */
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        
+        li h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        li p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        li span {
+            font-weight: bold;
+        }
+        
+        .purchase-link,
+        form button {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        #bar-graph-container {
+            margin: 30px auto;
+            width: 70%;
+            max-width: 400px; /* Adjust the max-width as needed */
+        }
+        
+        #bar-graph {
+            margin: 30px auto;
+            width: 70%;
+            max-width: 80%;
+            height: 0;
+            padding-bottom: 70%;
+        }
+        
+    </style>        
+
+</head>
+
+<body>
+    <div class="button-container">
+        <div class="left-nav-container">
+            <button class="nav-btn" onclick="location.href='/index'">main</button>
+            <button class="nav-btn" onclick="location.href='/upload_item'">Upload Item</button>
+            <button class="nav-btn" onclick="location.href='/seller_items'">Seller's Items</button>
+            <button class="nav-btn" onclick="location.href='/order'">Seller's Orders</button>
+            <button class="nav-btn" onclick="location.href='/'">Buyer's Page</button>
+            <button class="nav-btn" style="margin-top:0;" onclick="location.href='/logout'">Logout</button>
+        </div>
+    </div>
+    <h1>Seller Orders</h1>
+
+    <ul>
+        {% for item in items %}
+            <li>
+                {{ item.item_name }} - {{ item.item_description }} - {{ item.item_price }}
+                <img src="{{ item.item_image.url }}" width="500" height="600">
+                <p>Items Sold: {{ item.items_sold }}</p>
+                <a href="{% url 'sell_item' item.id %}" class="purchase-link">Sell</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div id="bar-graph"></div>
+    <script>
+        // Data for the bar graph
+        var itemNames = {{ item_names|safe }};
+        var itemsSoldCounts = {{ items_sold_counts|safe }};
+        
+        var data = [{
+            x: itemNames,
+            y: itemsSoldCounts,
+            type: 'bar',
+            marker: {
+                color: Array.from({ length: itemNames.length }, () => 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')')
+            }
+        }];
+
+        // Layout for the bar graph
+        var layout = {
+            title: 'Number of Items Sold vs. Item Name',
+            xaxis: {
+                title: 'Item Name'
+            },
+            yaxis: {
+                title: 'Number of Items Sold'
+            }
+        };
+
+        // Render the bar graph
+        Plotly.newPlot('bar-graph', data, layout);
+    </script>
+
+</body>
+
+</html>
