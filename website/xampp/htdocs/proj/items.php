@@ -97,7 +97,7 @@
 
     if ($result->num_rows > 0) {
         // Display items in table format
-        echo "<h2>transaction for Username: $username</h2>";
+        echo "<h2>transaction for: $username</h2>";
         echo "<table border='1'>";
         echo "<tr><th>Name</th><th>balance</th></tr>";
         while ($row = $result->fetch_assoc()) {
@@ -121,7 +121,7 @@
 
     if ($result->num_rows > 0) {
         // Display items in table format
-        echo "<h2>Inventory for Username: $username</h2>";
+        echo "<h2>Inventory for : $username</h2>";
         echo "<table border='1'>";
         echo "<tr><th>Name</th><th>orders</th></tr>";
         while ($row = $result->fetch_assoc()) {
@@ -135,7 +135,7 @@
     }
 
     } else {
-        echo "No items found for username: " . $username;
+        echo "No items found for : " . $username;
     }
 
       }
