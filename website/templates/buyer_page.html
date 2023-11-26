@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+{% load static %}
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +8,7 @@
     <title>Buyer Page</title>
 </head>
 <body>
-    <h1>Welcome to the Buyer Page!</h1>
+    <h1 class="title">Welcome to the Buyer Page!</h1>
 
     <h2>Available Products for Purchase:</h2>
     <ul>
@@ -16,6 +17,33 @@
                 {{ product.item_name }} - {{ product.item_description }} - {{ product.item_price }}
                 <img src="{{ product.item_image.url }}" width="500" height="600">
                 <a href="{% url 'purchase_product' product.id %}">Purchase</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Page</title>
+    <link rel="stylesheet" href="{% static "buyer_item.css" %}">
+</head>
+<body>
+    <h1 class="title">Welcome to the Buyer Page!</h1>
+
+    <h2>BUY Products by clicking</h2>
+    <ul class="product-list">
+        {% for product in products %}
+            <li class="product-item">
+                <img src="{{ product.item_image.url }}" alt="{{ product.item_name }}">
+                <h2>{{ product.item_name }}</h2>
+                <p>{{ product.item_description }}</p>
+                <p><span>Price:</span> Rs.{{ product.item_price }}</p>
+                <a href="{% url 'purchase_product' product.id %}" class="purchase-link">Buy</a>
             </li>
         {% endfor %}
     </ul>

@@ -1,30 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Items</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static "seller_items.css" %}">
 </head>
 <body>
     <h1 class="title">Your Uploaded Items</h1>
 
-    {% if items %}
-        <ul>
+    <table class="item-table">
+        {% if items %}
             {% for item in items %}
-            <li>
-                {{ item.item_name }} - {{ item.item_description }} - {{ item.item_price }}
-                <img src="{{ item.item_image.url }}" width="500" height="600">
-            </li>           
-
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                    <tr class="item-row">
+                {% endif %}
+                <td class="item">
+                    <img src="{{ item.item_image.url }}" alt="{{ item.item_name }}">
+                    <h2>{{ item.item_name }}</h2>
+                    <p>{{ item.item_description }}</p>
+                    <p><span>Price:</span> Rs.{{ item.item_price }}</p>
+                </td>
+                {% if forloop.last or forloop.counter|divisibleby:3 %}
+                    </tr>
+                {% endif %}
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No items uploaded yet.</p>
-    {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="3">No items uploaded yet.</td>
+            </tr>
+        {% endif %}
+    </table>
 
-    <a href="{% url 'upload_item' %}">Upload Another Item</a>
+    <a href="{% url 'upload_item' %}" class="upload-link">Upload Another Item</a>
 </body>
 </html>
