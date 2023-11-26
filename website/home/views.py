@@ -132,5 +132,36 @@ def purchase_product(request, product_id):
     sold_product.items_sold += 1
     sold_product.save()
 
-    return HttpResponse("ok purchased")
+    return render(request, 'purchase_successful.html')
+
+
+def seller_orders(request):
+    seller = request.user
+
+    # Filter items for the seller with count greater than 1
+    items = Item.objects.filter(seller=seller, items_sold__gt=0)
+
+    # Data for the bar graph
+    item_names = [item.item_name for item in items]
+    items_sold_counts = [item.items_sold for item in items]
+
+    context = {
+        'items': items,
+        'item_names': item_names,
+        'items_sold_counts': items_sold_counts,
+    }
+    # return render(request, 'order.html', {'items': items})
+    return render(request, 'order.html', context)
+
+
+def sell_item(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    seller = item.seller
+    seller_products = Item.objects.filter(seller=seller)
+    sold_product = seller_products.get(pk=item_id)
+    # Decrement the items_sold count for the item's seller
+    sold_product.items_sold -= 1
+    sold_product.save()
+
+    return redirect('seller_orders')
 

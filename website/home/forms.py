@@ -14,3 +14,5 @@ class UploadItemForm(forms.ModelForm):
         model = Item
         fields = ['item_name', 'item_category', 'item_price', 'item_image', 'item_description']
 
+class SellItemForm(forms.Form):
+    pass 
